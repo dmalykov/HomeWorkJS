@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+		// Pythagorean theorem
+
+function pythagorean(a, b) {
+  return Math.sqrt(a * a + b * b);
+}
+
+let c = pythagorean(5, 12);
+console.log(c); // This will print 13 to the console
+
+//   ---------------------------------------------------
+
+// Show number in money format
+
+function formatMoney(num) {
+  let isNegative = num < 0;
+
+  let absoluteNum = Math.abs(num).toFixed(2);
+
+  let parts = absoluteNum.split(".");
+  parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+
+  let formattedNum = (isNegative ? '-' : '+') + ' ' + parts.join('.');
+
+  return formattedNum;
+}
+
+console.log(formatMoney(1232323));
+console.log(formatMoney(-23.2132));
+
+// -------------------------------------------------------
+
+// Format number in spaces
+
+function numberWithSpaces(num) {
+  let parts = num.toString().split(".");
+  parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, " ");
+  return parts.join(".");
+}
+console.log(numberWithSpaces(1232323));
+console.log(numberWithSpaces(1223.65378));
+
+// -------------------------------------------------------
+
+// Password generator
+
+function generatePassword(n) {
+  const symbols =
+    !"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[]^_\`abcdefghijklmnopqrstuvwxyz;
+
+  let password = '';
+  const symbolsLength = symbols.length;
+
+  for (let i = 0; i < n; i++) {
+    const randomIndex = Math.floor(Math.random() * symbolsLength);
+    password += symbols[randomIndex];
+  }
+
+  return password;
+}
+
+console.log(generatePassword(8));
+
+//   -------------------------------------------------------
+
+// Get integer part of number and decimal
+
+function splitNumber(num) {
+  const intNum = Math.floor(num);
+  const decimalNum = Math.round((num - intNum) * 100);
+  const result = {
+    int: intNum,
+    decimal: decimalNum,
+  }
+  return result
+}
+console.log(splitNumber(2.34))
+// ---------------------------------------------------
+
+// Check if prime
+
+function isPrime(num) {
+  if (num <= 1) return false;
+  for (let i = 2; i < num; i++) {
+    if (num % i === 0) {
+      return false;
+    }
+  }
+  return true;
+}
+
+console.log(isPrime(5));
+
+// ----------------------------------------------------
+
+// Check if number is Armstrong Number
+
+function isArmstrong(n) {
+  let strNum = n.toString();
+  let num = strNum.length;
+  let sum = 0;
+  for (let i = 0; i < num; i++) {
+  sum += Math.pow(parseInt(strNum[i]), num);
+  };
+  return sum === n;
+};
+
+console.log(isArmstrong(153));
+
+// -----------------------------------------------------
+	</script>
+</body>
+</html>
