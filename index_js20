@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+</head>
+
+<body>
+	<script>
+const obj = {
+  from: 1,
+  to: 10,
+};
+
+function createArr() {
+  const arr = [];
+
+  for (let i = this.from; i < this.to; i++){
+    arr.push(i);
+  }
+
+  this.arr = arr;
+}
+const createArrBind = createArr.bind(obj);
+createArrBind();
+
+createArr.call(obj);
+createArr.apply(obj);
+
+obj.createArr = createArr;
+obj.createArr();
+
+console.log(obj);
+
+
+
+const calculator = {
+  result: 0,
+  sum(num) {
+    this.result += num;
+    return this;
+  },
+  sub(num) {
+    this.result -= num;
+    return this;
+  },
+  mul(num) {
+    this.result *= num;
+    return this;
+  },
+  div(num) {
+    this.result /= num;
+    return this;
+  }
+}
+
+calculator.sum(2).sum(2).mul(4);
+
+	</script>
+</body>
+
+</html>
