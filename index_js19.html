@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+</head>
+
+<body>
+	<script>
+		// Get days in year
+
+		function getDaysInYear(year) {
+			return ((year % 4 === 0 && year % 100 > 0) || year % 400 == 0) ? 366 : 365
+		};
+
+		console.log(getDaysInYear(2021));
+		// 365
+		console.log(getDaysInYear(2020));
+		// 366 -
+
+		// ------------------------------------------------------------
+
+		// Get day of year
+
+		function getDayNumber(date) {
+			const dateString = new Date(date);
+			const dayOfYear = Math.floor(
+				(dateString - new Date(dateString.getFullYear(), 0, 0)) / 86400000
+			);
+			return dayOfYear;
+		};
+
+		console.log(getDayNumber("2023-01-12"));
+		// 12
+
+		console.log(getDayNumber("2023-02-26"));
+		// 57
+
+		// -----------------------------------------------------------
+
+		// Get fiscal quarters
+
+		function getQuarters(date = new Date()) {
+			return Math.floor(date.getMonth() / 3 + 1);
+		};
+
+		console.log(getQuarters(new Date("2023-02-26")));
+		// Feb 26 is I quarter
+
+		// -----------------------------------------------------------
+
+	</script>
+</body>
+
+</html>
