@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+</head>
+
+<body>
+	<script>
+
+// Create arr method
+
+const obj = {
+  from: 1,
+  to: 10,
+};
+
+function createArr() {
+  const arr = [];
+
+  for (let i = this.from; i < this.to; i++){
+    arr.push(i);
+  }
+
+  this.arr = arr;
+}
+const createArrBind = createArr.bind(obj);
+createArrBind();
+
+createArr.call(obj);
+createArr.apply(obj);
+
+obj.createArr = createArr;
+obj.createArr();
+
+console.log(obj);
+
+// -----------------------------------------------------------
+
+// Calculator
+
+const calculator = {
+  result: 0,
+  sum(num) {
+    this.result += num;
+    return this;
+  },
+  sub(num) {
+    this.result -= num;
+    return this;
+  },
+  mul(num) {
+    this.result *= num;
+    return this;
+  },
+  div(num) {
+    this.result /= num;
+    return this;
+  }
+}
+
+calculator.sum(2).sum(2).mul(4);
+
+// -------------------------------------------------------
+
+// Constructor Function
+
+function Car(model, color, age, speed, gasTank, started) {
+  this.model = model;
+  this.color = color;
+  this.age = age;
+  this.speed = speed || 0;
+  this.gasTank = Math.min(gasTank || 0, 20);
+  this.started = started || false;
+
+  this.startEngine = function() {
+    if (this.checkGas() && this.gasTank > 0) {
+      this.started = true;
+    }
+    return this;
+  };
+
+  this.drive = function() {
+    if (this.started && this.gasTank > 0) {
+      this.speed = Math.min(this.speed + 30, 200);
+      this.gasTank -= 5;
+    }
+    return this;
+  };
+
+  this.stop = function() {
+    this.started = false;
+    this.speed = 0;
+    return this;
+  };
+
+  this.speedUp = function(arg) {
+    if (this.started) {
+      this.speed = Math.min(this.speed + arg, 200);
+      this.gasTank = Math.max(this.gasTank - 5, 0);
+      if (this.gasTank === 0) {
+        this.stop();
+      }
+    }
+    return this;
+  };
+
+  this.slowDown = function(arg) {
+    if (this.started) {
+      this.speed = Math.max(this.speed - arg, 0);
+      this.gasTank = Math.max(this.gasTank - 5, 0);
+      if (this.gasTank === 0) {
+        this.stop();
+      }
+    }
+    return this;
+  };
+
+  this.addGas = function(arg) {
+    this.gasTank = Math.min(this.gasTank + arg, 20);
+    return this;
+  };
+
+  this.checkGas = function() {
+    return this.gasTank > 0;
+  };
+}
+
+const myCar = new Car("Tesla", "Blue", 2, 0, 10, false);
+
+myCar.startEngine().addGas(5).drive().speedUp(10).slowDown(5).stop();
+
+console.log(myCar);
+
+// -------------------------------------------------------
+	</script>
+</body>
+
+</html>
