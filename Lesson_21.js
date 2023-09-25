@@ -95,5 +95,5 @@ const list = {
 	}
  };
  
- readList(list);
+ console.log(readList(list));
 //  --------------------------------------------------------
